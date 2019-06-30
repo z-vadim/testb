@@ -1,0 +1,28 @@
+---
+
+# - name: Add HAProxy server to /etc/hosts
+#   lineinfile:
+#     path: /etc/hosts
+#     line: “{{ hostvars[‘haproxy’].ansible_host }} haproxy”
+#     state: present
+ 
+- name: Install Nginx
+  package:
+    name: nginx
+    state: present
+  delegate_to: "{{vm1_host}}"
+ 
+- name: Allow port 80
+  shell: iptables -I INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+  delegate_to: "{{vm1_host}}"
+
+- name: Start Nginx server
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started
+  delegate_to: "{{vm1_host}}"
+
+- name: Wait for server to start
+  wait_for:
+    port: 80

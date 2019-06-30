@@ -1,0 +1,23 @@
+#cloud-config
+
+# Hostname management
+preserve_hostname: False
+hostname: {{ hostname }}
+fqdn: {{ fqdn }}
+
+# Configure where output will go
+output:
+  all: ">> /var/log/cloud-init.log"
+
+# configure interaction with ssh server
+ssh_svcname: ssh
+ssh_deletekeys: True
+ssh_genkeytypes: ['rsa', 'ecdsa']
+
+# Install my public ssh key to the first user-defined user configured
+# in cloud.cfg in the template (which is centos for CentOS cloud images)
+ssh_authorized_keys:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/psUlUd9m89Jf318DAFpD+rXzurfckBGcbSOcM5oyPVxkQkAJV90uomyKW9TeVFTs8S4Ec6NbBbvM7GCBzvipinxXdgJVHOwRCC6Z5IiKu1dJWxMyC8VYsxso9RjBQyrzAfXnrjPFgpqcyt0jknQWrgrJy9TSDjEjMvDImnF/+ayIx8aZQ09Q1IWeAKM9C9xC6Z8gVbxbywAgUE0NFsXB6fqyve8bbCyb1r3kDIO8Bc6X80e59sEztVluWvMdbyTbrVshcEYT4ldn5mlct1XNrAgr0PhTmxMtq5WA9M4rDadeEaobu7aE7QZ6JNGKQqwwO/OzZRkPwPFVfB03b4lP vadim@vadim-ThinkPad-T460s
+
+# runcmd:
+#   - yum -y remove cloud-init

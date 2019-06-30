@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+    - import_role:
+       name: prepare
+    
+    - name: Configure network for KVM
+      import_role:
+        name: network
+
+    - name: Deploy VM
+      import_role:
+        name: deploy
+    
+    - name: LB VM
+      import_role:
+        name: loadbalancer

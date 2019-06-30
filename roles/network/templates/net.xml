@@ -1,0 +1,15 @@
+<network>
+  <name>kvm-network</name>
+  <uuid>41999d54-fdb4-474a-b520-078dca8b3cab</uuid>
+  <forward mode='nat'>
+    <nat>
+      <port start='1024' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='kvm-virbr' stp='on' delay='0'/>
+  <ip address='192.168.10.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.10.2' end='192.168.10.5'/>
+    </dhcp>
+  </ip>
+</network>

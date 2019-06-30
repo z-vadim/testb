@@ -1,0 +1,6 @@
+---
+
+- name: Create directiry for VMs
+  file: "state=directory path=/opt/VMs force=yes mode 0777"
+  become: yes
+  delegate_to: "{{node_host}}"

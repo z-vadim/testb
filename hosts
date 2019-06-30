@@ -1,0 +1,13 @@
+[vm1]
+nginx1 host=192.168.10.2 ansible_connection=ssh ansible_user=centos ansible_password=password
+
+[vm2]
+nginx2 host=192.168.10.3 ansible_connection=ssh ansible_user=centos ansible_password=password
+
+[vm3]
+haproxy host=192.168.10.4 ansible_connection=ssh ansible_user=centos ansible_password=password
+
+
+[web:children]
+vm1
+vm2

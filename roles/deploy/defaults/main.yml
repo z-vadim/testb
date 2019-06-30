@@ -1,0 +1,72 @@
+# kvm_vm_pool_dir: /tmp/images
+kvm_install_host: localhost
+hypervisor_host: localhost
+
+# vm_data_dir: /tmp/kvm/vms
+# vm_recreate: true
+
+cloud_init_vm_image: CentOS-7-x86_64-GenericCloud-1905.qcow2
+cloud_init_vm_image_link: "http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1905.qcow2"
+
+
+# cloud_init_user_data: "{{vm_data_dir}}/{{vm_name}}/user-data"
+# cloud_init_meta_data: "{{vm_data_dir}}/{{vm_name}}/meta-data"
+# cloud_init_iso_data: "{{vm_data_dir}}/{{vm_name}}/cidata.iso"
+
+# vm_name: CentOS_Base
+# vm_local_hostname: base.example.com
+# vm_hostname: base.example.com
+
+# vm_cpu: 1
+# vm_memory: 1024
+vm_root_disk_size: 10G
+
+
+# # variables
+hostname: "{{ inventory_hostname }}"
+instance_id: "{{ hostname }}"
+fqdn: "{{ hostname }}.localdomain"
+ssh_pub_keys: []
+# memory: 1024
+# cpu: 1
+# disk_size: 30G
+ 
+# constants
+#base_dir: /var/lib/libvirt/managed
+base_dir: /tmp
+cloud_init_dir: "{{ base_dir }}/cloud_init"
+cloud_init_src_dir: "{{ cloud_init_dir }}/src/{{ instance_id }}"
+cloud_init_iso_dir: "{{ cloud_init_dir }}/iso"
+templates_dir:  "{{ base_dir }}/templates"
+images_dir: "{{ base_dir }}/images"
+vm_location: "{{ cloud_init_dir }}/vms"
+cloud_init_iso_image: "{{cloud_init_iso_dir}}/CentOS-7-x86-64-GenericCloud.qcow2.iso"
+root_pass: 'sss'
+
+ip_suffix: 10
+
+guests:
+  vm1:
+    mem: 1024
+    cpus: 1
+    os_type: rhel7
+    file_type: qcow2
+    network: kvm-network
+  vm2:
+    mem: 512
+    cpus: 1
+    os_type: rhel7
+    file_type: qcow2
+    network: kvm-network
+  vm3:
+    mem: 512
+    cpus: 1
+    os_type: rhel7
+    file_type: qcow2
+    network: kvm-network
+  vm4:
+    mem: 512
+    cpus: 1
+    os_type: rhel7
+    file_type: qcow2
+    network: kvm-network
